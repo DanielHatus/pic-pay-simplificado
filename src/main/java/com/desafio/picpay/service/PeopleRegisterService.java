@@ -44,10 +44,7 @@ public class PeopleRegisterService{
             this.validationPassword=validationPassword;
             this.formattingCpf=formattingCpf;
             this.validationPatch=validationPatch;
-
     }
-
-
     public Page<DtoPersonComplete> findAllPageByOrder(Pageable pageable){
       return mapper.mapperPage(repository.findAll(pageable),DtoPersonComplete.class);
     }
@@ -56,7 +53,7 @@ public class PeopleRegisterService{
      if (validationId.IdIsValid(id)){
          return mapper.mapperObject(repository.findById(id).get(), DtoPersonComplete.class);
      }
-     throw new NotFound("Id Not Found In Database .");
+     throw new NotFound("Id "+id+" Not found In Database.");
     }
 
     public DtoPersonComplete createPerson(DtoPost entityDto){
@@ -71,15 +68,14 @@ public class PeopleRegisterService{
     public DtoPersonComplete updatePerson(DtoPut entityDto){
     if (validationId.IdIsValid(entityDto.getId())&&validationPassword.PasswordIsCorrect(entityDto.getPassword())){
         Person entity=mapper.mapperObject(entityDto,Person.class);
-        return mapper.mapperObject(repository.save(entity),DtoPersonComplete.class);
+         return mapper.mapperObject(repository.save(entity),DtoPersonComplete.class);
     }
     throw new NotFound("Id Not Found.");
+    //possivel falha de segurança???
     }
-
     public DtoPersonComplete updatePartial(Long id, HashMap<String,Object> hashMap){
         return mapper.mapperObject(repository.save(validationPatch.validationMethodPatch(id,hashMap)),DtoPersonComplete.class);
     }
-
     public void deleteById(Long id){
         if(validationId.IdIsValid(id)){
             repository.deleteById(id);
