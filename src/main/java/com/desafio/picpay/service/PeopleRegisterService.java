@@ -12,6 +12,7 @@ import com.desafio.picpay.validation.repository.*;
 import com.desafio.picpay.validation.service.helper.FormattingCpf;
 import com.desafio.picpay.validation.service.interfaces.ValidationPassword;
 import com.desafio.picpay.validation.service.interfaces.ValidationPatch;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -73,7 +74,7 @@ public class PeopleRegisterService{
     throw new NotFound("Id Not Found.");
     //possivel falha de segurança???
     }
-    public DtoPersonComplete updatePartial(Long id, HashMap<String,Object> hashMap){
+    public DtoPersonComplete updatePartial(Long id, @Valid HashMap<String,Object> hashMap){
         return mapper.mapperObject(repository.save(validationPatch.validationMethodPatch(id,hashMap)),DtoPersonComplete.class);
     }
     public void deleteById(Long id){

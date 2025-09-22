@@ -7,6 +7,7 @@ import com.desafio.picpay.dto.put.DtoPut;
 import com.desafio.picpay.dto.returns.DtoPersonComplete;
 import com.desafio.picpay.service.PeopleRegisterService;
 import com.desafio.picpay.validation.controller.interfaces.CheckPageable;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -60,7 +61,7 @@ public class PersonControllerCrud implements DocControllerPersonControllerCrud {
             consumes ={MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
             produces ={MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 
-    public ResponseEntity<DtoPersonComplete> createPerson( @RequestBody DtoPost entity) {
+    public ResponseEntity<DtoPersonComplete> createPerson( @RequestBody @Valid DtoPost entity) {
         return ResponseEntity.created(null).body(peopleRegisterService.createPerson(entity));
     }
 
@@ -68,7 +69,7 @@ public class PersonControllerCrud implements DocControllerPersonControllerCrud {
     @PutMapping(
             consumes ={MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
             produces ={MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<DtoPersonComplete> updateTotalResource( @RequestBody DtoPut entity) {
+    public ResponseEntity<DtoPersonComplete> updateTotalResource( @RequestBody @Valid DtoPut entity) {
         return ResponseEntity.ok(peopleRegisterService.updatePerson(entity));
 
     }
