@@ -18,10 +18,7 @@ public class PaymentService{
     public PaymentService(LogicPayment logicPayment) {
         this.logicPayment = logicPayment;
     }
-
-    @PatchMapping(
-            consumes ={MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
-            produces ={MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+    
     public List<DtoReturnPartial> paymentUser(DtoPaymentPerson dtoEntity){
       return logicPayment.makingPayment(dtoEntity);
     }

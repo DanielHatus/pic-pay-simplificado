@@ -1,0 +1,9 @@
+CREATE TABLE clients (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    password INT NOT NULL,
+    type_user ENUM('USER','STOREKEEPER') NOT NULL,
+    statement DOUBLE (15,2)
+);
